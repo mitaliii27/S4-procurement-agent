@@ -1,0 +1,12 @@
+# Cloud Foundry manifest for SAP BTP (UNTESTED here - no BTP account was available while building).
+applications:
+  - name: s4-procurement-agent
+    memory: 256M
+    instances: 1
+    buildpacks: [python_buildpack]
+    command: uvicorn app.api:api --host 0.0.0.0 --port $PORT
+    health-check-type: http
+    health-check-http-endpoint: /health
+    env:
+      # S4_BASE_URL: https://<your-destination-host>   # leave unset to use the built-in mock
+      S4_BASE_PATH: /odata
